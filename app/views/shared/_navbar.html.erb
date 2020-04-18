@@ -85,7 +85,9 @@
         </li>
       </ul>
       <% if session[:login_token]%>
-        <div class="nav-link">您好<%= session[:login_token] %></div>
+        <div class="nav-link">
+        <%= link_to "您好 #{session[:login_token]}", url: user_path %>
+        </div>
         <%= link_to "登出", login_path, method:'delete',class:'nav-link' %>
       <% else %>
         <%= link_to "註冊", new_user_path, class:'nav-link' %>
