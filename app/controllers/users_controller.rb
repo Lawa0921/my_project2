@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     find_user
 
     if @user
-      session[:login_token] = params[:user][:email]
+      session[:login_token] = @user.email
       redirect_to root_path, notice: "歡迎 #{params[:user][:email]} 您以成功登入！"
     else
       render :login
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   
   private
   def find_user
-    @user = User.find(params[:user][:email])
+    @user = User.find_by(email: params[:user][:email])
   end
 
   def find_user_by_session
