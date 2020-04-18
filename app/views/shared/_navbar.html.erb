@@ -84,8 +84,8 @@
           <a class="nav-link" href="#">線上訂房</a>
         </li>
       </ul>
-      <% if session[:abcdefg]%>
-        <div class="nav-link">您好<%= session[:abcdefg] %></div>
+      <% if session[:login_token]%>
+        <div class="nav-link">您好<%= session[:login_token] %></div>
         <%= link_to "登出", login_path, method:'delete',class:'nav-link' %>
       <% else %>
         <%= link_to "註冊", new_user_path, class:'nav-link' %>
