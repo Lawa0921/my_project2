@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    find_user
+    @user = User.find_by(email: session[:login_token])
   end
 
   def edit
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_clean) # 這邊這樣做的原因是因為必須要讓@user 拿到 model的方法，才有辦法做 .save
+    @user = User.new(user_clean) # 請查看 strong parameters 概念
     if @user.save
       session[:login_token] = @user.email
       redirect_to root_path, notice: "已成功註冊！"
@@ -39,6 +39,12 @@ class UsersController < ApplicationController
       render :login
       flash[:notice] = "帳號或密碼錯誤！"
     end
+  end
+
+  def destroy
+    @user = User.find_by(email: session[:login_token])
+    @user.destroy
+    redirect_to root_path, notice: "已註銷帳號"
   end
   
   private
