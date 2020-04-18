@@ -53,6 +53,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    session[:login_token] = nil
     redirect_to root_path, notice: "已註銷帳號"
   end
   
