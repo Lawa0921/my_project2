@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
+
+  before_action :find_user_by_session, only: [:show, :edit, :update, :destroy]
+
   def show
-    @user = User.find_by(email: session[:login_token])
   end
 
   def edit
-    @user = User.find_by(email: session[:login_token])
   end
 
   def update
-    @user = User.find_by(email: session[:login_token])
-
     if @user.update(user_clean)
       redirect_to root_path, notice: "成功修改帳號密碼"
     else
@@ -41,8 +40,9 @@ class UsersController < ApplicationController
   end
 
   def login_action
-    user = User.find_by(email: params[:user][:email], password: params[:user][:password])
-    if user
+    find_user
+
+    if @user
       session[:login_token] = params[:user][:email]
       redirect_to root_path, notice: "歡迎 #{params[:user][:email]} 您以成功登入！"
     else
@@ -52,15 +52,19 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by(email: session[:login_token])
     @user.destroy
     redirect_to root_path, notice: "已註銷帳號"
   end
   
   private
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user][:email])
   end
+
+  def find_user_by_session
+    @user = User.find_by(email: session[:login_token])
+  end
+
   def user_clean
     params.require(:user).permit(:email, :password, :tel, :password_confirmation)
   end
