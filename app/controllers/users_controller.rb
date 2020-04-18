@@ -4,7 +4,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    find_user
+    @user = User.find_by(email: session[:login_token])
+  end
+
+  def update
+    @user = User.find_by(email: session[:login_token])
+
+    if @user.update(user_clean)
+      redirect_to root_path, notice: "成功修改帳號密碼"
+    else
+      render :edit
+    end
   end
 
   def new

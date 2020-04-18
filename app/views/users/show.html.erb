@@ -4,5 +4,9 @@
 <h1>
   電話：<%= @user.tel %>
 </h1>
-
-<%= link_to "註銷使用者", url_for('user'), method: 'delete', data: {confirm: "是否確認刪除?"}%>
+<div>
+  <%= link_to "註銷使用者", url_for('user'), method: 'delete', data: {confirm: "是否確認刪除?"}%>
+</div>
+<div>
+  <%= link_to "修改使用者資料", edit_user_path %>
+</div>
