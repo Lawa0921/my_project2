@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     if @user
       session[:login_token] = @user.email
-      redirect_to root_path, notice: "歡迎 #{params[:user][:email]} 您以成功登入！"
+      redirect_to root_path, notice: "歡迎 #{@user.email} 您以成功登入！"
     else
       render :login
       flash[:notice] = "帳號或密碼錯誤！"

@@ -1,0 +1,40 @@
+<p>
+  <strong>Title:</strong>
+  <%= @work.title %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @work.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @work.desc %>
+</p>
+
+<% if @work.name == "一個圖片"%>
+<div class="text-center">
+  <h1 class="m-3">一個圖片</h1>
+  <input type="text" class="img-link w-50" />
+  <div class="m-5">
+    <button type="button" class="btn btn-primary" aria-placeholder="123">
+      送出
+    </button>
+  </div>
+  <div id="img-container m-5">
+    <img src="" />
+  </div>
+</div>
+  <% content_for :javascript do %>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $(".btn").on("click", function () {
+      console.log("123456465132651815616");
+    });
+  });
+  </script>
+  <% end %>
+<% end %>
+<%= link_to 'Edit', edit_work_path(@work) %> | 
+<%= link_to 'Back', works_path %>

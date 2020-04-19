@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get "/login", to: "users#login"
   post "/login", to: "users#login_action"
   delete "/login", to: "users#logout"
+
+  resources :works
 end
