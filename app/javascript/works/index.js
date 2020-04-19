@@ -1,5 +1,9 @@
+// import $ from "jquery";
+
 $(document).ready(function () {
   $(".btn").on("click", function () {
-    console.log("123456465132651815616");
+    let imgLink = $("#input").val();
+    $("#img-container").append(`<img src="${imgLink}">`);
+    console.log(imgLink);
   });
 });
